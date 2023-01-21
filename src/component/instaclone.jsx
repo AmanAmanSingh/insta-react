@@ -8,7 +8,7 @@ const InstaClone = () => {
     const [postData, setPostData] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8081/images").then((imageData) => {
+        axios.get("https://instaclone-server-fh5k.onrender.com/images").then((imageData) => {
             setPostData(imageData.data.images)
             // debugger;
         })

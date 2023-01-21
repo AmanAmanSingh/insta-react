@@ -16,7 +16,7 @@ const UploadPost = () => {
     const handleSubmition = async () => {
         try {
             const base64Path = await fileTobase64(imageFile);
-            const data = await axios.post("http://localhost:8081/upload", {
+            const data = await axios.post("https://instaclone-server-fh5k.onrender.com/upload", {
                 image: base64Path,
                 author: author,
                 location: location,
