@@ -8,7 +8,8 @@ const UploadPost = () => {
     const [postData, setPostData] = useState({ author: "", location: "", description: "" });
     const [imageFile, setImageFile] = useState("");
     const [imageName, setImageName] = useState("Attach File");
-
+    const [alertMsg, setAlert] = useState(null)
+    const [clickOnce, setClickOnce] = useState(0)
     const navigate = useNavigate();
 
     const handleSubmition = async () => {
@@ -60,9 +61,10 @@ const UploadPost = () => {
                         onChange={(e) => {
                             const file = e.target.files[0];
                             if (file.size > 384000) {
-                                alert("File size is too large, maximum allowed file size is 375kb");
+                                setAlert("File size is too large, maximum allowed file size is 375kb")
                             } else {
                                 setImageFile(e.target.files[0]); setImageName(e.target.files[0].name);
+                                setAlert(null);
                             }
                         }} />
                 </section>
@@ -82,10 +84,11 @@ const UploadPost = () => {
                 </section>
 
                 <section className="post-btn">
-                    <button onClick={handleSubmition} disabled={disable ? false : true}>POST</button>
+                    <button onClick={() => { handleSubmition(); setClickOnce(1) }} disabled={disable && clickOnce == 0 ? false : true}>POST</button>
                 </section>
             </div>
-            {disable && <h4 className="alert-msg">After click on post please wait...</h4>}
+            {alertMsg && <h4 className="alert-msg">{alertMsg}</h4>}
+            {clickOnce == 1 ? <h4 className="upload-msg">Uploading....</h4> : null}
         </>
     )
 }

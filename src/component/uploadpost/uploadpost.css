@@ -94,5 +94,13 @@ textarea {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: rgb(230, 37, 11);
+}
+
+.upload-msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: rgb(11, 230, 95);
 }
