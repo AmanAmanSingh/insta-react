@@ -1,7 +1,7 @@
 import HeaderInsta from "../header/header";
 import "./instacard.css";
 import shareIcon from "../../IMAGES/send.png"
-
+import loader from "../../IMAGES/loader-gif.gif"
 const InstaCard = ({ jsonData }) => {
     const newjsonData = Object.values(jsonData);
     // console.log(newjsonData, "json");
@@ -9,6 +9,7 @@ const InstaCard = ({ jsonData }) => {
     return (
         <>
             <HeaderInsta />
+            {!newjsonData.length && <img className="loader-img" src={loader} alt="loader-image" />}
             <main className="main-container">
                 {newjsonData.map((value, index) => {
                     return (

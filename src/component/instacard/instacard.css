@@ -76,3 +76,9 @@ h5 {
 .share {
     color: rgb(20, 22, 24);
 }
+
+.loader-img {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}

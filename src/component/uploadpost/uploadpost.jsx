@@ -4,12 +4,10 @@ import axios from "axios";
 import "./uploadpost.css"
 import { useNavigate } from "react-router-dom";
 const UploadPost = () => {
-    const [author, setauthor] = useState("")
-    const [location, setLocation] = useState("")
-    const [description, setDescription] = useState("")
+
+    const [postData, setPostData] = useState({ author: "", location: "", description: "" });
     const [imageFile, setImageFile] = useState("");
     const [imageName, setImageName] = useState("Attach File");
-    const [Err, setErr] = useState(null);
 
     const navigate = useNavigate();
 
@@ -18,21 +16,19 @@ const UploadPost = () => {
             const base64Path = await fileTobase64(imageFile);
             const data = await axios.post("https://instaclone-server-fh5k.onrender.com/upload", {
                 image: base64Path,
-                author: author,
-                location: location,
-                description: description
+                author: postData.author,
+                location: postData.location,
+                description: postData.description
             })
-            // console.log(data);
-
-            setauthor(""); setLocation(""); setDescription(""); setImageFile("");
+            setPostData("");
+            navigate("/insta-main");
         }
         catch (e) {
-            console.log(e)
-            setErr(e.response.data.message.message);
+            console.log(e.response.data.message.message);
         }
         // console.log(base64Path);
-        // console.log(postData);
     }
+
     const fileTobase64 = (file) => {
         if (!file) {
             return undefined;
@@ -48,10 +44,9 @@ const UploadPost = () => {
             }
         })
     }
-
+    let disable = (imageFile && postData.author && postData.location && postData.description);
 
     return (
-
         <>
             <HeaderInsta />
             <div className="upload-container">
@@ -65,23 +60,23 @@ const UploadPost = () => {
 
                 <div className="author-location">
                     <div>
-                        <input type="text" id="author" placeholder="author" name="author" onChange={(e) => { setauthor(e.target.value) }} value={author} />
+                        <input type="text" id="author" placeholder="author" name="author" onChange={(e) => { setPostData({ ...postData, author: e.target.value }) }} value={postData.author} />
                     </div>
                     <div>
-                        <input type="text" id="location" placeholder="Location" name="location" onChange={(e) => { setLocation(e.target.value) }} value={location} />
+                        <input type="text" id="location" placeholder="Location" name="location" onChange={(e) => { setPostData({ ...postData, location: e.target.value }) }} value={postData.location} />
                     </div>
                 </div>
 
                 <section>
-                    <textarea id="description" value={description} placeholder="Description" onChange={(e) => setDescription(e.target.value)}>
+                    <textarea id="description" placeholder="Description" onChange={(e) => setPostData({ ...postData, description: e.target.value })} value={postData.description}>
                     </textarea>
                 </section>
 
                 <section className="post-btn">
-                    <button onClick={() => { handleSubmition(); }}>POST</button>
+                    <button onClick={handleSubmition} disabled={disable ? false : true}>POST</button>
                 </section>
             </div>
-            {Err && <h1 className="alert-msg" >ALL FIELD  REQUIRED.....</h1>}
+            {disable && <h4 className="alert-msg">After click on post please wait...</h4>}
         </>
     )
 }
