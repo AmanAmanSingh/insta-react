@@ -12,6 +12,7 @@ const UploadPost = () => {
     const navigate = useNavigate();
 
     const handleSubmition = async () => {
+
         try {
             const base64Path = await fileTobase64(imageFile);
             const data = await axios.post("https://instaclone-server-fh5k.onrender.com/upload", {
@@ -20,6 +21,7 @@ const UploadPost = () => {
                 location: postData.location,
                 description: postData.description
             })
+
             setPostData("");
             navigate("/insta-main");
         }
@@ -55,7 +57,14 @@ const UploadPost = () => {
                         {imageName}
                     </label>
                     <input id="file-input" type="file" className="file-input"
-                        onChange={(e) => { setImageFile(e.target.files[0]); setImageName(e.target.files[0].name); }} />
+                        onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file.size > 384000) {
+                                alert("File size is too large, maximum allowed file size is 375kb");
+                            } else {
+                                setImageFile(e.target.files[0]); setImageName(e.target.files[0].name);
+                            }
+                        }} />
                 </section>
 
                 <div className="author-location">
