@@ -1,0 +1,59 @@
+.register-container {
+    min-width: 100%;
+    height: 100vh;
+    background-color: rgb(3, 56, 56);
+    display: flex;
+    justify-content: center;
+}
+
+.register-container form {
+    margin: auto;
+    width: 600px;
+    height: 350px;
+    border: 2px solid #707070;
+    margin-top: 4em;
+    border-radius: 10%;
+    background: linear-gradient(to right, #9b59b6, #f48fb1);
+    color: rgb(26, 25, 25);
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.register-container form section label {
+    display: block;
+}
+
+.insta-tittle {
+    font-family: 'Pacifico';
+    font-size: 24px;
+    font-size: 2.4rem;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.reg-btn button {
+    width: 5rem;
+    height: 3rem;
+    border-radius: 30%;
+    margin-top: 1rem;
+    border: 1px solid #9b59b6;
+    font-weight: 600;
+}
+
+.reg-btn button:hover {
+    font-weight: 600;
+    color: #fff;
+    background: black
+}
+
+#email,
+#password,
+#username {
+    width: 15em;
+    height: 2em;
+    border-radius: 5px;
+}

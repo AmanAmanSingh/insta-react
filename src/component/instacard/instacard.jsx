@@ -2,9 +2,20 @@ import HeaderInsta from "../header/header";
 import "./instacard.css";
 import shareIcon from "../../IMAGES/send.png"
 import loader from "../../IMAGES/loader-gif.gif"
+import { useState } from "react";
+
 const InstaCard = ({ jsonData }) => {
     const newjsonData = Object.values(jsonData);
-    // console.log(newjsonData, "json");
+    const [counts, setCounts] = useState({});
+    // const [clicked, setClicked] = useState({})
+
+    const handleLikes = (id) => {
+        // console.log(id)
+        setCounts(prevCounts => ({ ...prevCounts, [id]: (prevCounts[id] || 0) + 1 }));
+        //{63d53b173563a04ff25004c2: 1}
+
+    }
+
 
     return (
         <>
@@ -19,7 +30,7 @@ const InstaCard = ({ jsonData }) => {
                                     <h3>{value.author}</h3>
                                     <h4>{value.location}</h4>
                                 </div>
-                                <div>
+                                <div >
                                     <h3><i className="fa fa-ellipsis-h fa-lg" aria-hidden="true"></i></h3>
                                 </div>
                             </section>
@@ -31,7 +42,7 @@ const InstaCard = ({ jsonData }) => {
                             <section className="like_save-icons">
                                 <div className="share-icon-flex">
                                     <div>
-                                        <article className="likes" ><i className="fa fa-heart-o fa-lg" aria-hidden="true"></i></article>
+                                        <article className="likes" onClick={() => handleLikes(value._id)}><i className="fa fa-heart-o fa-lg" aria-hidden="true"></i></article>
                                     </div>
                                     <div><i className="fa fa-comments-o fa-lg" aria-hidden="true"></i></div>
                                     <div>
@@ -44,7 +55,9 @@ const InstaCard = ({ jsonData }) => {
                             </section>
 
                             <section className="count-likes">
-                                <div>{value.likes}</div>
+                                <div>
+                                    {counts[value._id] || 0} ❤️
+                                </div>
                             </section>
 
                             <section className="discription">

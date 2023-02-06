@@ -1,6 +1,6 @@
 .entry-container {
     margin-top: 40px;
-    width: 100vw;
+    width: 100%;
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -46,10 +46,57 @@ img {
 }
 
 .login-page {
-    height: 100vh;
+    width: 100vw;
+    height: 150vh;
     padding-top: 1%;
     background: #f09433;
     background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.login-form {
+    width: 250px;
+    height: auto;
+    margin-left: 2.8em;
+}
+
+.login-form section label {
+    display: block;
+    margin: auto;
+    color: aliceblue;
+}
+
+.login-btn {
+    margin-top: 10%;
+    margin-left: 23%;
+    width: 8em;
+    height: 2em;
+}
+
+#email,
+#password {
+    width: 15em;
+    height: 2em;
+    border-radius: 5px;
+}
+
+#signup {
+    width: 8em;
+    height: 2em;
+}
+
+.loging-msg {
+    color: rgb(60, 3, 52);
+}
+
+@media screen and (max-width: 600px) {
+    .entry-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-page {
+        width: 150vw;
+    }
 }

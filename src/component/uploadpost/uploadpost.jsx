@@ -2,7 +2,7 @@ import { useState } from "react";
 import HeaderInsta from "../header/header";
 import axios from "axios";
 import "./uploadpost.css"
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const UploadPost = () => {
 
     const [postData, setPostData] = useState({ author: "", location: "", description: "" });
@@ -13,7 +13,6 @@ const UploadPost = () => {
     const navigate = useNavigate();
 
     const handleSubmition = async () => {
-
         try {
             const base64Path = await fileTobase64(imageFile);
             const data = await axios.post("https://instaclone-server-fh5k.onrender.com/upload", {
@@ -22,7 +21,6 @@ const UploadPost = () => {
                 location: postData.location,
                 description: postData.description
             })
-
             setPostData("");
             navigate("/insta-main");
         }
@@ -52,11 +50,15 @@ const UploadPost = () => {
     return (
         <>
             <HeaderInsta />
+            <section className="logout-comp" >
+                <Link to="/logout"> <button>Logout</button></Link>
+            </section>
             <div className="upload-container">
                 <section>
                     <label htmlFor="file-input" className="fa fa-cloud-upload fa-lg" >
                         {imageName}
                     </label>
+
                     <input id="file-input" type="file" className="file-input"
                         onChange={(e) => {
                             const file = e.target.files[0];
@@ -68,7 +70,6 @@ const UploadPost = () => {
                             }
                         }} />
                 </section>
-
                 <div className="author-location">
                     <div>
                         <input type="text" id="author" placeholder="author" name="author" onChange={(e) => { setPostData({ ...postData, author: e.target.value }) }} value={postData.author} />
@@ -89,6 +90,7 @@ const UploadPost = () => {
             </div>
             {alertMsg && <h4 className="alert-msg">{alertMsg}</h4>}
             {clickOnce == 1 ? <h4 className="upload-msg">Uploading....</h4> : null}
+
         </>
     )
 }

@@ -104,3 +104,24 @@ textarea {
     align-items: center;
     color: rgb(11, 230, 95);
 }
+
+.logout-comp {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.logout-comp button {
+    float: right;
+    width: 5rem;
+    height: 3rem;
+    border-radius: 30%;
+    border: 5px solid #626162;
+    font-weight: 600;
+
+}
+
+.logout-comp button:hover {
+    font-weight: 600;
+    color: #fff;
+    background: black
+}
